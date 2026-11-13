@@ -2,21 +2,28 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = {
-    'Name': ['A', 'B', 'C', 'D', 'E'],
-    'Marks': [80, 90, 70, 85, 95]
-}
+# Read CSV dataset
+df = pd.read_csv("student_marks.csv")
 
-df = pd.DataFrame(data)
+# Calculate average marks
+subjects = ['Python', 'Pandas', 'NumPy']
+df['Average'] = np.mean(df[subjects], axis=1)
 
-df['Average'] = np.mean(df['Marks'])
-
+# Display student data
+print("STUDENT PERFORMANCE ANALYSIS")
 print(df)
-print("Highest Marks:", df['Marks'].max())
-print("Lowest Marks:", df['Marks'].min())
 
-plt.bar(df['Name'], df['Marks'])
+# Highest and lowest average
+print("Highest Average:", df['Average'].max())
+print("Lowest Average:", df['Average'].min())
+
+# Subject-wise average
+print("Subject Average:")
+print(df[subjects].mean())
+
+# Create bar chart
+plt.bar(df['Name'], df['Average'])
 plt.title("Student Performance Analysis")
 plt.xlabel("Students")
-plt.ylabel("Marks")
+plt.ylabel("Average Marks")
 plt.show()
